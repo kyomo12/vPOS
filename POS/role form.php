@@ -61,7 +61,7 @@
 
 
 
-                                                <div class="group">
+                                                <div class="form-group col-md-4">
                                                         <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">ADD</button>
                                                 </div>
 
