@@ -15,5 +15,11 @@ function activities()
 	$this->db->from('activities');
 	return $this->db->get();
 }
+function materials()
+{
+	$this->db->select('*');
+	$this->db->from('materials');
+	return $this->db->get();
+}
 
 }

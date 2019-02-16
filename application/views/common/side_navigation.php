@@ -21,8 +21,8 @@
             <li class="xn-openable">
                 <a href="#"><span class="fa fa-desktop"></span> <span class="xn-text">POS</span></a>
                 <ul>
-                    <li><a href="register_proxy.html"><span class="fa fa-users"></span>Registration</a></li>
-                    <li><a href="manage_shareholder.html"><span class="fa fa-sort-amount-asc"></span>POS List</a></li>
+                    <!-- <li><a href="<?php echo base_url(); ?>pos/new_pos"><span class="fa fa-users"></span>Registration</a></li> -->
+                    <li><a href="<?php echo base_url(); ?>pos/pos"><span class="fa fa-sort-amount-asc"></span>POS</a></li>
                 </ul>
             </li>
             
@@ -33,6 +33,7 @@
                     <li><a href="#"><span class="fa fa-sort-amount-asc"></span>Previleges</a></li>
                      <li><a href="<?php echo base_url();?>pos/activities"><span class="fa fa-sort-amount-asc"></span>Activity</a></li>
                      <li><a href="<?php echo base_url();?>pos/pos_categories"><span class="fa fa-sort-amount-asc"></span>Categories</a></li>
+                     <li><a href="<?php echo base_url();?>pos/materials"><span class="fa fa-sort-amount-asc"></span>Materials</a></li>
 
 
                 </ul>
