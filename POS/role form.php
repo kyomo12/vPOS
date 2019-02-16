@@ -34,7 +34,7 @@
 
                                             <form action="#" class="form-horizontal" method="POST" role="form">
                                                 <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-4">
                                                         <div class="form-group">
                                                             <label for="name">Role Name</label>
                                                             <input required type="text" class="form-control" name="name" placeholder="Role Name "/>
