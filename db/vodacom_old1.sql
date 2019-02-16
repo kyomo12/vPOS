@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2019 at 11:58 AM
+-- Generation Time: Feb 15, 2019 at 04:44 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.13
 
@@ -30,17 +30,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `activities` (
   `id` int(12) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` int(100) NOT NULL,
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `activities`
---
-
-INSERT INTO `activities` (`id`, `name`, `created_by`) VALUES
-(2, 'Selling Phones', NULL),
-(3, 'MPESA', NULL);
 
 -- --------------------------------------------------------
 
@@ -54,14 +46,6 @@ CREATE TABLE `category` (
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `name`, `created_by`) VALUES
-(3, 'Agent', NULL),
-(4, 'TR', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -71,15 +55,9 @@ INSERT INTO `category` (`id`, `name`, `created_by`) VALUES
 CREATE TABLE `materials` (
   `id` int(20) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` varchar(100) DEFAULT NULL
+  `description` int(100) DEFAULT NULL,
+  `size_id` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `materials`
---
-
-INSERT INTO `materials` (`id`, `name`, `description`) VALUES
-(1, 'MPESA BANGO', 'Mabango ya mpesa');
 
 -- --------------------------------------------------------
 
@@ -260,19 +238,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pos`
