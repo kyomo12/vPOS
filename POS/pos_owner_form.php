@@ -33,67 +33,48 @@
 
 
                                             <form action="#" class="form-horizontal" method="POST" role="form">
-                                                <div class="form-row">
+                                                <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <div class=" no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input required type="text" class="form-control" name="first_name" placeholder="First Name "/>
+                                                        <div class="form-group">
+                                                            <label for="first_name">First Name</label>
+                                                            <input required type="text" class="form-control" name="first_name" placeholder="First Name"/>
                                                         </div>
-                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
+
+                                                <div class="form-group col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="middle_name">Middle Name</label>
                                                             <input required type="text" class="form-control" name="middle_name" placeholder="Middle Name"/>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div>
 
-                                             <div class="form-row">
+                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <div class=" no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input required type="text" class="form-control" name="last_name" placeholder="last Name"/>
+                                                        <div class="form-group">
+                                                            <label for="last_name">Last Name</label>
+                                                            <input required type="text" class="form-control" name="last_name" placeholder="Last Name"/>
                                                         </div>
-                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fas fa-at"></span>
-                                                            </div>
+
+                                                <div class="form-group col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="email">Email</label>
                                                             <input required type="text" class="form-control" name="email" placeholder="Email"/>
                                                         </div>
-                                                    </div>
                                                 </div>
-                                            </div>
 
-                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <div class=" no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-address-book"></span>
-                                                            </div>
+                                                        <div class="form-group">
+                                                            <label for="mobile">Mobile</label>
                                                             <input required type="text" class="form-control" name="mobile" placeholder="Mobile"/>
                                                         </div>
-                                                    </div>
                                                 </div>
-                                                
                                             </div>
 
-                                             
+
+                                           
+
                                             </div>
 
 
@@ -111,10 +92,8 @@
 
 
 
-                                                <div class="form-group">
-                                                    <div class="col-md-4 no-padding-left no-padding-right">
+                                                <div class="form-group col-md-4">
                                                         <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">ADD</button>
-                                                    </div>
                                                 </div>
 
 
