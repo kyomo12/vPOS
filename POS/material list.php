@@ -26,14 +26,12 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>NAME</th>
-                                                    <th>MATERIAL SIZE</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
                                                     <td>Bango la Vodacom</td>
-                                                    <td>Large</td> 
                                                </tr>
                                             </tbody>
                                         </table>

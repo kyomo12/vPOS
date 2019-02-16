@@ -7,7 +7,7 @@
                         <div class="page-content-wrap">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">MATERIALS</h3>
+                                    <h3 class="panel-title">Register POS Material</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
@@ -38,9 +38,32 @@
                                                     <div class=" no-padding-left no-padding-right">
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
+                                                                <span class="fa fa-desktop"></span>
+                                                            </div>
+                                                            <input required type="text" class="form-control" name="pos_id" placeholder="POS Name "/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="no-padding-left no-padding-right">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
                                                                 <span class="fa fa-user"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" name="name" placeholder="Material Name "/>
+                                                            <input required type="text" class="form-control" name="matrial_id" placeholder="Material"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                             <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <div class=" no-padding-left no-padding-right">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <span class="fa fa-desktop"></span>
+                                                            </div>
+                                                            <input required type="text" class="form-control" name="status" placeholder="Material Status "/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -48,46 +71,35 @@
                                                     <div class="no-padding-left no-padding-right">
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
-                                                                <span class="fas fa-balance-scale"></span>
+                                                                <span class="fa fa-cogs"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" name="size_id" placeholder="Material Size"/>
+                                                            <input required type="text" class="form-control" name="size_id" placeholder="Size"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                              <div class="form-group ">
-                                                    <div class="no-padding-left no-padding-right">
+
+                                             <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <div class=" no-padding-left no-padding-right">
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
-                                                                <span class="fa fa-edit"></span>
+                                                                <span class="fa fa-cloud-upload"></span>
                                                             </div>
-                                                            <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                                                            <input required type="text" class="form-control" name="photo" placeholder="Upload photo"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            </div>
 
-
-                                                    <div class="form-group">
-                                                        <!-- <div class="col-md-12 no-padding-left no-padding-right">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <span class="fa fa-envelope"></span>
-                                                                </div>
-                                                                <input required type="text" class="form-control" name="ic_number" placeholder="Unique number"/>
-                                                            </div>
-                                                        </div> -->
-                                                    </div>
-
-
-
+                                            
                                                 <div class="form-group">
-                                                    <div class="col-md-6 no-padding-left no-padding-right">
+                                                    <div class="col-md-4 no-padding-left no-padding-right">
                                                         <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">ADD</button>
                                                     </div>
                                                 </div>
-
 
 
                                             </form>
