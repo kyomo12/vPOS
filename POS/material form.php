@@ -7,7 +7,7 @@
                         <div class="page-content-wrap">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">MATERIALS</h3>
+                                    <h3 class="panel-title">Register Material</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
@@ -30,32 +30,25 @@
 
                                             </div>
 
+
+
                                             <form action="#" class="form-horizontal" method="POST" role="form">
-                                                <div class="form-row">
+                                                <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <div class=" no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input required type="text" class="form-control" name="name" placeholder="Material Name "/>
+                                                        <div class="form-group">
+                                                            <label for="name">Material Name</label>
+                                                            <input required type="text" class="form-control" name="name" placeholder="Material Name"/>
                                                         </div>
-                                                    </div>
                                                 </div>
 
-                                                <div class="form-group ">
-                                                    <div class="no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-edit"></span>
-                                                            </div>
-                                                            <textarea class="form-control" name="description" placeholder="Description"></textarea>
+                                                <div class="form-group col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="Description">Description</label>
+                                                            <textarea class="form-control" name="last_name" placeholder="Description"></textarea>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             </div>
-                                              
 
 
 
@@ -72,10 +65,8 @@
 
 
 
-                                                <div class="form-group">
-                                                    <div class="col-md-6 no-padding-left no-padding-right">
+                                                <div class="form-group col-md-4">
                                                         <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">ADD</button>
-                                                    </div>
                                                 </div>
 
 
