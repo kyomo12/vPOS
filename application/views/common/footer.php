@@ -36,6 +36,17 @@
 
         <script type="text/javascript" src="<?php echo base_url(); ?>js/plugins/datatables/jquery.dataTables.min.js"></script>
         <!-- END PAGE PLUGINS -->
+        <!--DATA TABLE-->
+        <script src="<?php echo base_url(); ?>assets/datatable2/jquery.dataTables.min.js"></script>
+   <!--  <script type="text/javascript" src="<?php echo base_url(); ?>assets/datatable2/dataTables.bootstrap.min.js" ></script> -->
+    <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/select2/js/select2.full.js" ></script> -->
+    <script src="<?php echo base_url(); ?>assets/datatable2/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable2/buttons.flash.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable2/jszip.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable2/pdfmake.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable2/vfs_fonts.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable2/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable2/buttons.print.min.js"></script>
 
         <!-- START TEMPLATE -->
 
@@ -47,7 +58,7 @@
 
     <!-- COUNTERS // NOT INCLUDED IN TEMPLATE -->
         <!-- GOOGLE -->
-        <script type="text/javascript">
+       <!--  <script type="text/javascript">
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -55,7 +66,7 @@
 
           ga('create', 'UA-36783416-1', 'aqvatarius.com');
           ga('send', 'pageview');
-        </script>
+        </script> -->
         <!-- END GOOGLE -->
 
         <!-- YANDEX -->
@@ -81,6 +92,7 @@
             } else { f(); }
         })(document, window, "yandex_metrika_callbacks");
         </script>
+        <?php $this->load->view('common/scripts'); ?>
         <noscript><div><img src="http://mc.yandex.ru/watch/25836617" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- END YANDEX -->
     <!-- END COUNTERS // NOT INCLUDED IN TEMPLATE -->

@@ -2426,7 +2426,7 @@ input[type=checkbox] {
   width: auto;
 }
 .form-control {
-  height: 30px;
+  height: 40px;
   font-size: 12px;
   line-height: 18px;
   -moz-box-shadow: none;
@@ -3418,7 +3418,7 @@ blockquote.pull-right {
   margin: 0px;
   font-weight: normal;
 }
-.dataTables_length select {
+/*.dataTables_length select {
   width: 70px;
   display: inline;
   margin: 0px 5px;
@@ -3449,7 +3449,7 @@ td.dataTables_empty {
   font-size: 12px;
   padding: 0px;
   line-height: 30px;
-}
+}*/
 .dataTables_paginate {
   padding: 0px;
   text-align: right;

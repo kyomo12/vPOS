@@ -25,35 +25,16 @@
                     <li><a href="manage_shareholder.html"><span class="fa fa-sort-amount-asc"></span>POS List</a></li>
                 </ul>
             </li>
-            <li class="xn-openable">
-                <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Proxy</span></a>
-                <ul>
-                    <li><a href="register_proxy.html"><span class="fa fa-users"></span>Registration</a></li>
-                    <li><a href="manage_proxy.html"><span class="fa fa-sort-amount-asc"></span>Manage</a></li>
-                </ul>
-            </li>
-            <li class="show-menu-arrow">
-                <a href="attandance.html"><span class="fa fa-calendar"></span> <span class="xn-text">Attendance</span></a>
-            </li>
-
-            <li class="xn-openable">
-                <a href="#"><span class="fa fa-gavel"></span> <span class="xn-text">Voting</span></a>
-                <ul>
-                    <li><a href="vote_dashboard.html"><span class="fa fa-tags"></span>Resolution</a></li>
-                    <li><a href="#"><span class="fa fa-signal"></span>History</a></li>
-                </ul>
-            </li>
-            <li class="show-menu-arrow">
-                <a href="#"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">General Report</span></a>
-            </li>
-            <li class="show-menu-arrow">
-                <a href="meeting_setup.html"><span class="fa fa-flag-checkered"></span> <span class="xn-text">Start Meeting</span></a>
-            </li>
+            
             <li class="xn-openable">
                 <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Settings</span></a>
                 <ul>
                     <li><a href="#"><span class="fa fa-users"></span>User Management</a></li>
                     <li><a href="#"><span class="fa fa-sort-amount-asc"></span>Previleges</a></li>
+                     <li><a href="<?php echo base_url();?>pos/activities"><span class="fa fa-sort-amount-asc"></span>Activity</a></li>
+                     <li><a href="<?php echo base_url();?>pos/pos_categories"><span class="fa fa-sort-amount-asc"></span>Categories</a></li>
+
+
                 </ul>
             </li>
 

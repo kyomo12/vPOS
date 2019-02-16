@@ -11,4 +11,22 @@ function footer()
     return $CI->common->footer();
      
     }
+function insert($table,$data=[])
+    {
+    $CI = get_instance();
+    return $CI->common->insert($table,$data);
+     
+    }
+function update($table,$id_name,$data,$id_value)
+{
+ $CI = get_instance();
+    return $CI->common->update($table,$id_name,$data,$id_value);
+           
+}
+function table_by_id($table,$id_name,$id_value)
+    {
+    $CI = get_instance();
+    return $CI->common->table_by_id($table,$id_name,$id_value);
+     
+    }
 

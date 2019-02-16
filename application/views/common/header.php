@@ -13,5 +13,8 @@
 
     <!-- CSS INCLUDE -->
     <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url(); ?>css/theme-default.css"/>
+    <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url(); ?>assets/datatable2/jquery.dataTables.min2.css"/>
+    <!--  <script src="<?php echo base_url(); ?>assets/datatable2/dataTables.buttons.min.js"></script> -->
     <!-- EOF CSS INCLUDE -->
+   
 </head>
