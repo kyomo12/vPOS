@@ -6,8 +6,9 @@ class Common extends CI_Model
 function header_view($data=[])
 {
 	$this->load->view('common/header.php',$data);
-	$this->load->view('common/top_navigation.php');
 	$this->load->view('common/side_navigation.php');
+	$this->load->view('common/top_navigation.php');
+	
 }
 function footer()
 {
