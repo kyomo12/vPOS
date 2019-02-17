@@ -17,6 +17,12 @@ function insert($table,$data=[])
     return $CI->common->insert($table,$data);
      
     }
+function model_list($table)
+    {
+    $CI = get_instance();
+    return $CI->common->model_list($table);
+     
+    }
 function update($table,$id_name,$data,$id_value)
 {
  $CI = get_instance();

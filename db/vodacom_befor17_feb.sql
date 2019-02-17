@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2019 at 07:53 AM
+-- Generation Time: Feb 16, 2019 at 11:58 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.13
 
@@ -100,19 +100,8 @@ CREATE TABLE `pos` (
   `street` varchar(30) DEFAULT NULL,
   `latitude` varchar(50) DEFAULT NULL,
   `longtude` varchar(50) DEFAULT NULL,
-  `pos_status` varchar(20) DEFAULT NULL,
-  `created_by` int(10) NOT NULL
+  `pos_status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pos`
---
-
-INSERT INTO `pos` (`id`, `name`, `category_id`, `owner_id`, `till_no`, `region`, `district`, `ward`, `Village_mtaa`, `street`, `latitude`, `longtude`, `pos_status`, `created_by`) VALUES
-(1, 'KIWANGO', 0, 1, '555', 'Dar es Salaam', 'Ilala', 'Kikwambe', 'Malinyi', NULL, '3.0900', NULL, NULL, 1),
-(2, 'Kimako', 0, 1, 'welcome', 'Mbeya', 'Mbalizi', 'ward', 'Mbalizi', NULL, '30', NULL, NULL, 1),
-(3, 'KIWANGO', 4, 1, '65757', 'Mbeya', 'MBz', 'ward', 'MBZ', NULL, '20', NULL, NULL, 1),
-(4, 'KIWANGO2', 4, 1, '6575745', 'MBY', 'JIJI', 'wer', 'err', NULL, '30', NULL, 'Active', 1);
 
 -- --------------------------------------------------------
 
@@ -158,32 +147,6 @@ CREATE TABLE `pos_owner` (
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pos_owner`
---
-
-INSERT INTO `pos_owner` (`id`, `first_name`, `last_name`, `middle_name`, `email`, `mobile`, `created_by`) VALUES
-(1, 'Jackon', 'Karango', 'HH', 'kara.h@gmail.com', '07654321890', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rate`
---
-
-CREATE TABLE `rate` (
-  `id` int(11) NOT NULL,
-  `council` varchar(20) NOT NULL,
-  `rate_per_area` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rate`
---
-
-INSERT INTO `rate` (`id`, `council`, `rate_per_area`) VALUES
-(1, 'Kasuru', 120);
-
 -- --------------------------------------------------------
 
 --
@@ -195,13 +158,6 @@ CREATE TABLE `role` (
   `name` varchar(50) NOT NULL,
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `role`
---
-
-INSERT INTO `role` (`id`, `name`, `created_by`) VALUES
-(1, 'Sales Agent', NULL);
 
 -- --------------------------------------------------------
 
@@ -216,14 +172,6 @@ CREATE TABLE `sizes` (
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `sizes`
---
-
-INSERT INTO `sizes` (`id`, `height`, `width`, `created_by`) VALUES
-(1, 20, 30, NULL),
-(2, 20, 20, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -236,16 +184,9 @@ CREATE TABLE `user` (
   `last_name` varchar(50) NOT NULL,
   `mobile` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `role_id` int(12) NOT NULL,
+  `role` int(12) NOT NULL,
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `mobile`, `email`, `role_id`, `created_by`) VALUES
-(1, 'John', 'John', '0765345678', 'kyomo89elieza@gmao.com', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -294,12 +235,6 @@ ALTER TABLE `pos_owner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rate`
---
-ALTER TABLE `rate`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -343,7 +278,7 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT for table `pos`
 --
 ALTER TABLE `pos`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pos_activities`
@@ -361,31 +296,25 @@ ALTER TABLE `pos_material`
 -- AUTO_INCREMENT for table `pos_owner`
 --
 ALTER TABLE `pos_owner`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `rate`
---
-ALTER TABLE `rate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sizes`
 --
 ALTER TABLE `sizes`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

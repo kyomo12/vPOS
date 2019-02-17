@@ -7,7 +7,7 @@
                         <div class="page-content-wrap">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Register POS Owner</h3>
+                                    <h3 class="panel-title">New User</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
@@ -28,7 +28,7 @@
 
 
 
-                                            <form action="<?php echo base_url(); ?>pos/new_owner" class="form-horizontal" method="POST" role="form">
+                                            <form action="<?php echo base_url(); ?>user/new_user" class="form-horizontal" method="POST" role="form">
                                                 <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">First name</label>
@@ -89,6 +89,23 @@
                                                             <input required type="number" class="form-control" name="mobile" placeholder="Mobile" value="<?php echo set_value('mobile'); ?>" />
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('mobile').'</span>'; ?>
+                                           
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label">Role</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <span class="fa fa-address-book"></span>
+                                                            </div>
+                                                            <select class="form-control" required name="role_id">
+                                                                <option value="">Select User</option>
+                                                                <?php foreach ($roles as $list): ?>
+                                                                    <option value="<?php echo $list->id; ?>" ><?php echo $list->name; ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <?php echo '<span class="text-danger">'. form_error('role').'</span>'; ?>
                                            
                                                 </div>
                                                 

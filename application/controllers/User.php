@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pos extends CI_Controller {
+class User extends CI_Controller {
 function __construct()
 	{
 	   parent::__construct();		
@@ -9,13 +9,13 @@ function __construct()
 	   $this->load->model('pos_model','',TRUE);
 	}
 
-function pos_list()
+function list()
         {
         	$data['title']='Category list';
 
-        	$data['lists']=$this->pos_model->pos()->result();
+        	$data['lists']=$this->common->users()->result();
         	initial_view($data);
-        	$this->load->view('pos/pos_list');
+        	$this->load->view('pos/user/user_list');
         	footer();	
         }
 public function new_category()
@@ -110,54 +110,6 @@ public function edit_activity()
           }
 		
 	}
-public function new_size()
-	{
-		    $data['title']='New material';
-		   initial_view($data);
-        	$this->load->library('form_validation');
-		    $this->form_validation->set_rules('height', 'heigth', 'trim|required');
-		    $this->form_validation->set_rules('width', 'width', 'trim|required');
-		   if($this->form_validation->run() == FALSE)
-		   { 
-		   	$this->load->view('pos/material/size_new_form');
-		    footer();
-		   }
-		   else {	
-		   	$data_in = array('height' => $this->input->post('height'),'width' => $this->input->post('width'));
-
-		   	insert('sizes',$data_in);
-            //$this->parent_model->insert($data);
-            $this->session->set_flashdata('message_name',
-				 'Success! Created the size');
-            redirect('pos/new_size');
-          }
-		
-	}
-public function edit_size()
-	{        $id=$this->uri->segment(3);
-		    if (empty($id)) $id=$this->input->post('id');
-		    $data['lists']=table_by_id('sizes','id',$id);
-		    $data['title']='Edit SiZE';
-		   initial_view($data);
-        	$this->load->library('form_validation');
-        	$this->form_validation->set_rules('id', 'id', 'trim|required');
-		    $this->form_validation->set_rules('height', 'height', 'trim|required');
-		    $this->form_validation->set_rules('width', 'width', 'trim|required');
-		   if($this->form_validation->run() == FALSE)
-		   { 
-		   	$this->load->view('pos/material/size_update_form');
-		    footer();
-		   }
-		   else {	
-		   $data_in = array('height' => $this->input->post('height'),'width' => $this->input->post('width'));
-		   	update('sizes','id',$data_in,$this->input->post('id'));
-            //$this->parent_model->insert($data);
-            $this->session->set_flashdata('message_name',
-				 'Success! Updated the size');
-            redirect('pos/sizes');
-          }
-		
-	}
 public function new_material()
 	{
 		    $data['title']='New material';
@@ -238,50 +190,53 @@ public function new_owner()
             redirect('pos/new_owner');
           }	
 	}
-public function update_owner()
+public function update_user()
 	{
 		    $id=$this->uri->segment(3);
 		    if (empty($id)) $id=$this->input->post('id');
-		    $data['title']='update owner';
-		    $data['lists']=table_by_id('pos_owner','id',$id);
+		    $data['title']='update user';
+		    $data['lists']=table_by_id('user','id',$id);
 		    initial_view($data);
         	$this->load->library('form_validation');
         	$this->form_validation->set_rules('id', 'id', 'trim|required');
 		    $this->form_validation->set_rules('first_name', 'first name', 'trim|required');
 		    $this->form_validation->set_rules('last_name', 'last name', 'trim|required');
-		    $this->form_validation->set_rules('middle_name', 'middle name', 'trim|required');
+		    //$this->form_validation->set_rules('middle_name', 'middle name', 'trim|required');
 		    $this->form_validation->set_rules('email', 'email', 'trim|required');
+		    $this->form_validation->set_rules('role_id', 'role', 'trim|required');
 		    $this->form_validation->set_rules('mobile', 'mobile', 'trim|required|min_length[10]|max_length[13]');
 		    //$this->form_validation->set_rules('description', 'description', 'trim|required');
 		   if($this->form_validation->run() == FALSE)
 		   { 
-		   	$this->load->view('pos/owner/update_owner');
+		   	$this->load->view('pos/user/update_user');
 		    footer();
 		   }
 		   else {	
 		   	$data_in = array('first_name' => $this->input->post('first_name'),
 		   		             'last_name'=>$this->input->post('last_name'),
-		   		             'middle_name'=>$this->input->post('middle_name'),
+		   		             'role_id'=>$this->input->post('role_id'),
 		   		             'email'=>$this->input->post('email'),
 		   		             'mobile'=>$this->input->post('mobile')
 		   		             
 		   		         );
 
-		   	update('pos_owner','id',$data_in,$this->input->post('id'));
+		   	update('user','id',$data_in,$this->input->post('id'));
             //$this->parent_model->insert($data);
             $this->session->set_flashdata('message_name',
-				 'Success! Updated the owner');
-            redirect('pos/pos_owner');
+				 'Success! Updated the user');
+            redirect('user/list');
           }	
 	}
 public function new_user()
 	{
 		    $data['title']='New user';
+		    $data['roles']=$this->common->roles()->result();
 		   initial_view($data);
         	$this->load->library('form_validation');
 		    $this->form_validation->set_rules('first_name', 'first name', 'trim|required');
 		    $this->form_validation->set_rules('last_name', 'last name', 'trim|required');
 		    $this->form_validation->set_rules('middle_name', 'middle name', 'trim|required');
+		    $this->form_validation->set_rules('role_id', 'role', 'trim|required');
 		    $this->form_validation->set_rules('email', 'email', 'trim|required|is_unique[pos_owner.email]');
 		    $this->form_validation->set_rules('mobile', 'mobile', 'trim|required|min_length[10]|max_length[13]|is_unique[pos_owner.mobile]');
 		    //$this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -293,16 +248,17 @@ public function new_user()
 		   else {	
 		   	$data_in = array('first_name' => $this->input->post('first_name'),
 		   		             'last_name'=>$this->input->post('last_name'),
-		   		             'middle_name'=>$this->input->post('middle_name'),
+		   		             //'middle_name'=>$this->input->post('middle_name'),
 		   		             'email'=>$this->input->post('email'),
 		   		             'mobile'=>$this->input->post('mobile'),
+		   		             'role_id'=>$this->input->post('role_id'),
 		   		             'created_by'=>1//user_id()
 		   		         );
 
 		   	insert('user',$data_in);
             //$this->parent_model->insert($data);
             $this->session->set_flashdata('message_name',
-				 'Success! registered the owner');
+				 'Success! registered the user');
             redirect('pos/new_user');
           }	
 	}
@@ -369,16 +325,9 @@ public function new_pos()
         	$data['catlist']=$this->pos_model->categories()->result();
 		   initial_view($data);
         	$this->load->library('form_validation');
-        	//owner
-        	 $this->form_validation->set_rules('first_name', 'first name', 'trim|required');
-		    $this->form_validation->set_rules('last_name', 'last name', 'trim|required');
-		   $this->form_validation->set_rules('middle_name', 'middle name', 'trim');
-		    $this->form_validation->set_rules('email', 'email', 'trim');
-		    $this->form_validation->set_rules('mobile', 'mobile', 'trim|required|min_length[10]|max_length[13]|is_unique[pos_owner.mobile]');
-        	//
-		    $this->form_validation->set_rules('name', ' name', 'trim|required');
+		    $this->form_validation->set_rules('name', 'first name', 'trim|required');
 		    $this->form_validation->set_rules('till_no', 'till no', 'trim|required');
-		    /*$this->form_validation->set_rules('owner_id', 'middle name', 'trim|required');*/
+		    $this->form_validation->set_rules('owner_id', 'middle name', 'trim|required');
 		    $this->form_validation->set_rules('category_id', 'region', 'trim|required');
 		    $this->form_validation->set_rules('region', 'district', 'trim|required');
 		    $this->form_validation->set_rules('district', 'district', 'required');
@@ -395,14 +344,6 @@ public function new_pos()
 		    footer();
 		   }
 		   else {	
-		   	$data_owner = array('first_name' => $this->input->post('first_name'),
-		   		             'last_name'=>$this->input->post('last_name'),
-		   		             'middle_name'=>$this->input->post('middle_name'),
-		   		             'email'=>$this->input->post('email'),
-		   		             'mobile'=>$this->input->post('mobile'),
-		   		             'created_by'=>1//user_id()
-		   		         );
-		   	$owner_id=insert('pos_owner',$data_owner);
 		   	$data_in = array('name' => $this->input->post('name'),
 		   		'latitude'=>$this->input->post('latitude'),
 		   		'longtude'=>$this->input->post('longtude'),
@@ -413,7 +354,7 @@ public function new_pos()
 		   		'region'=>$this->input->post('region'),
 		   		'district'=>$this->input->post('district'),
 		   		'till_no'=>$this->input->post('till_no'),
-		   		'owner_id'=>$owner_id,
+		   		'owner_id'=>$this->input->post('owner_id'),
 		   		'pos_status'=>$this->input->post('status'),
 		   		'created_by'=>1
 	
@@ -425,55 +366,6 @@ public function new_pos()
             $this->session->set_flashdata('message_name',
 				 'Success! Created the material');
             redirect('pos/new_pos');
-          }
-		
-	}
-public function new_rate()
-	{
-		    $data['title']='New material';
-		   initial_view($data);
-        	$this->load->library('form_validation');
-		     $this->form_validation->set_rules('council', 'council', 'trim|required');
-		    $this->form_validation->set_rules('rate_per_area', 'rate per area', 'trim|required');
-		   if($this->form_validation->run() == FALSE)
-		   { 
-		   	$this->load->view('pos/tax_rate/tax_new_form');
-		    footer();
-		   }
-		   else {	
-		   	 $data_in = array('council' => $this->input->post('council'),'rate_per_area' => $this->input->post('rate_per_area'));
-
-		   	insert('rate',$data_in);
-            //$this->parent_model->insert($data);
-            $this->session->set_flashdata('message_name',
-				 'Success! Created the rate');
-            redirect('pos/new_rate');
-          }
-		
-	}
-public function edit_rate()
-	{        $id=$this->uri->segment(3);
-		    if (empty($id)) $id=$this->input->post('id');
-		    
-		    $data['title']='Edit CONCIL';
-		   initial_view($data);
-        	$this->load->library('form_validation');
-        	$this->form_validation->set_rules('id', 'id', 'trim|required');
-		    $this->form_validation->set_rules('council', 'council', 'trim|required');
-		    $this->form_validation->set_rules('rate_per_area', 'rate per area', 'trim|required');
-		   if($this->form_validation->run() == FALSE)
-		   { 
-		   	$data['lists']=table_by_id('rate','id',$id);
-		   	$this->load->view('pos/tax_rate/tax_update_form',$data);
-		    footer();
-		   }
-		   else {	
-		   $data_in = array('council' => $this->input->post('council'),'rate_per_area' => $this->input->post('rate_per_area'));
-		   	update('rate','id',$data_in,$this->input->post('id'));
-            //$this->parent_model->insert($data);
-            $this->session->set_flashdata('message_name',
-				 'Success! Updated the rate');
-            redirect('pos/tax_rates');
           }
 		
 	}
@@ -507,22 +399,6 @@ function materials()
         	$data['lists']=$this->pos_model->materials()->result();
         	initial_view($data);
         	$this->load->view('pos/material/material_list');
-        	footer();	
-        }
-function sizes()
-        {
-        	$data['title']='Category list';
-        	$data['lists']=model_list('sizes')->result();//$this->pos_model->sizes()->result();
-        	initial_view($data);
-        	$this->load->view('pos/material/size_list');
-        	footer();	
-        }
-function tax_rates()
-        {
-        	$data['title']='Tax list';
-        	$data['lists']=model_list('rate')->result();//$this->pos_model->sizes()->result();
-        	initial_view($data);
-        	$this->load->view('pos/tax_rate/rate_list');
         	footer();	
         }
 }

@@ -13,6 +13,10 @@
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
                                     </ul>
                                 </div>
+                                <?php 
+                  if (! empty($this->session->flashdata('message_name'))){?>
+                  <div class="alert alert-success pull-right col-md-12"> <?php echo  $this->session->flashdata('message_name');?> </div> 
+             <?php }?>
                             <div class="panel panel-body">
 
 
@@ -36,14 +40,14 @@
                                                 <div class="row">
                                                 <div class="form-group col-md-6">
                                                         <div class="form-group">
-                                                            <label for="height">Height</label>
+                                                            <label for="height">Height[cm]</label>
                                                             <input required type="text" class="form-control" name="height" placeholder="Height"/>
                                                         </div>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                         <div class="form-group">
-                                                            <label for="width">Width</label>
+                                                            <label for="width">Width[cm]</label>
                                                             <input required type="text" class="form-control" name="width" placeholder="Width"/>
                                                         </div>
                                                 </div>
