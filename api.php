@@ -2,6 +2,8 @@
 require_once("api/controller/PosRestHandler.php");
 require_once("api/controller/UserRestHandler.php");
 require_once("api/controller/AuthHandler.php");
+require_once("api/controller/MaterialRestHandler.php");
+require_once("api/controller/ActivityRestHandler.php");
 
 $request = "";
 $data = "";
@@ -50,6 +52,16 @@ switch($request){
 	case "users":
 		$userRestHandler = new UserRestHandler();
 		$userRestHandler->getRequestMethod($data);
+		break;
+
+	case "materials":
+		$materialRestHandler = new MaterialRestHandler();
+		$materialRestHandler->getRequestMethod($data);
+		break;
+
+	case "activities":
+		$activityRestHandler = new ActivityRestHandler();
+		$activityRestHandler->getRequestMethod($data);
 		break;
 
 	case "" :
