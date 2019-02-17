@@ -1,5 +1,7 @@
 <?php
 require_once("api/controller/PosRestHandler.php");
+require_once("api/controller/UserRestHandler.php");
+require_once("api/controller/AuthHandler.php");
 
 $request = "";
 $data = "";
@@ -18,6 +20,16 @@ if(isset($_GET["request"])) {
 	}
 }
 
+$token = new AuthHandler();
+$header = "";
+
+if($request != 'login') {
+	$status = $token->verifyToken();
+	if($status == false){
+		$request = "unverified";
+	}
+}
+
 switch($request){
 
 	case "pos":
@@ -25,9 +37,26 @@ switch($request){
 		$posRestHandler->getRequestMethod($data);
 		break;
 
+	case "login":
+		$authHandler = new AuthHandler();
+		$authHandler->login();
+		break;
+
+	// case "logout":
+	// 	$authenticationHandler = new AuthenticationHandler();
+	// 	$authenticationHandler->logout($data);
+	// 	break;
+
+	case "users":
+		$userRestHandler = new UserRestHandler();
+		$userRestHandler->getRequestMethod($data);
+		break;
+
 	case "" :
 		//404 - not found;
 		header("HTTP/1.1 404 Not Found");
+		break;
+	case "unverified" :
 		break;
 }
 

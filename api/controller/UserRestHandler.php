@@ -1,8 +1,8 @@
 <?php
 require_once("api/controller/ApiRest.php");
-require_once("api/models/Pos.php");
+require_once("api/models/User.php");
 
-class PosRestHandler extends ApiRest {
+class UserRestHandler extends ApiRest {
 
 	function getRequestMethod($data) {
 		$request_method=$_SERVER["REQUEST_METHOD"];
@@ -12,24 +12,24 @@ class PosRestHandler extends ApiRest {
 				// Retrive Pos
 				if(!empty($data))
 				{
-					$pos_id = intval($data);
-					$this->getPos($pos_id);
+					$user_id = intval($data);
+					$this->getUsers($user_id);
 				}
 				else
 				{
-					$this->getPos($pos_id=0);
+					$this->getUsers($user_id=0);
 				}
 				break;
 			case 'POST':
-				$this->insertPOS();
+				$this->insertUser();
 				break;
 			case 'PUT':
-				$pos_id = intval($data);
-				$this->updatePos($pos_id);
+				$user_id = intval($data);
+				$this->updateUser($user_id);
 				break;
 			case 'DELETE':
-				$pos_id = intval($data);
-				$this->deletePos($pos_id);
+				$user_id = intval($data);
+				$this->deleteUser($user_id);
 				break;
 			default:
 				// Invalid Request Method
@@ -38,13 +38,13 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function getPos($pos_id) {
+	function getUsers($user_id) {
 
-		$pos = new Pos();
-		$rawData = $pos->getPos($pos_id);
+		$user = new User();
+		$rawData = $user->getUsers($user_id);
 		if(empty($rawData) || sizeof($rawData) == 0) {
 			$statusCode = 404;
-			$rawData = array('error' => 'No POS found!');
+			$rawData = array('error' => 'No User found!');
 		} else {
 			$statusCode = 200;
 		}
@@ -58,19 +58,18 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function insertPos() {
+	function insertUser() {
 		if (empty($_POST)) {
 			$_POST = json_decode(file_get_contents("php://input"), true) ? : [];
 		}
-		$json_str = file_get_contents('php://input');
 
-		$pos = new Pos();
-		if($pos->insertPos($_POST)) {
-			$statusCode = 200;
-			$insertResponse = array('success' => 'POS Added Successfully');
+		$user = new User();
+		if($user->insertUser($_POST)) {
+			$statusCode = 201;
+			$insertResponse = array('success' => 'User Added Successfully');
 		} else {
 			$statusCode = 300;
-			$insertResponse = array('error' => 'POS Addition Unsuccessfully');
+			$insertResponse = array('error' => 'User Addition Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
@@ -82,20 +81,20 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function updatePos($pos_id) {
+	function updateUser($user_id) {
 		if (empty($_POST)) {
 			$_POST = json_decode(file_get_contents("php://input"), true) ? : [];
 		}
 		$json_str = file_get_contents('php://input');
 
-		$pos = new Pos();
+		$user = new User();
 
-		if($pos->updatePos($pos_id, $_POST)) {
-			$statusCode = 200;
-			$updateResponse = array('success' => 'POS Updated Successfully');
+		if($user->updateUser($user_id, $_POST)) {
+			$statusCode = 204;
+			$updateResponse = array('success' => 'User Updated Successfully');
 		} else {
 			$statusCode = 300;
-			$updateResponse = array('error' => 'POS Update Unsuccessfully');
+			$updateResponse = array('error' => 'User Update Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
@@ -107,16 +106,20 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function deletePos($pos_id) {
+	function deleteUser($user_id) {
 
-		$pos = new Pos();
+		$user = new User();
+		$rawData = $user->getUsers($user_id);
 
-		if($pos->deletePos($pos_id)) {
+		if(empty($rawData) || sizeof($rawData) == 0) {
+			$statusCode = 404;
+			$updateResponse = array('error' => 'No User found!');
+		} elseif ($user->deleteUser($user_id)) {
 			$statusCode = 200;
-			$updateResponse = array('success' => 'POS Deleted Successfully');
+			$updateResponse = array('success' => 'User Deleted Successfully');
 		} else {
 			$statusCode = 300;
-			$updateResponse = array('error' => 'POS Deletion Unsuccessfully');
+			$updateResponse = array('error' => 'User Deletion Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);

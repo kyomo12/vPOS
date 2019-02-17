@@ -52,9 +52,6 @@ Class Pos {
 		$longtude = $request['longtude'];
 		$pos_status = $request['pos_status'];
 
-
-		$query="UPDATE products SET product_name='{$product_name}', price={$price}, quantity={$quantity}, seller='{$seller}' WHERE id=".$product_id;
-
 		$query="UPDATE pos SET name='{$name}', category_id='{$category_id}', owner_id='{$owner_id}',
 						till_no='{$till_no}', region='{$region}', district='{$district}', ward='{$ward}',
 						Village_mtaa='{$village_mtaa}', street='{$street}',	latitude='{$latitude}', longtude='{$longtude}',
