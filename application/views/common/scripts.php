@@ -55,7 +55,93 @@ $(document).ready(function() {
            'excel', 'pdf'
         ]
     } );
-
+          $('.owner').DataTable( {
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+           {
+                    text: '+New',
+                    className: 'orange, btn btn-info',
+                     action: function (e, dt, node, config)
+                        {
+                            
+                           window.location='<?php echo base_url(); ?>pos/new_owner';
+                           
+                        }
+                },
+           'excel', 'pdf'
+        ]
+    } );
+     
+          $('.pos').DataTable( {
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+           {
+                    text: '+New',
+                    className: 'orange, btn btn-info',
+                     action: function (e, dt, node, config)
+                        {
+                            
+                           window.location='<?php echo base_url(); ?>pos/new_pos';
+                           
+                        }
+                },
+           'excel', 'pdf'
+        ]
+    } );
+     
+          $('.user').DataTable( {
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+           {
+                    text: '+New',
+                    className: 'orange, btn btn-info',
+                     action: function (e, dt, node, config)
+                        {
+                            
+                           window.location='<?php echo base_url(); ?>user/new_user';
+                           
+                        }
+                },
+           'excel', 'pdf'
+        ]
+    } );
+          $('.rate').DataTable( {
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+           {
+                    text: '+New',
+                    className: 'orange, btn btn-info',
+                     action: function (e, dt, node, config)
+                        {
+                            
+                           window.location='<?php echo base_url(); ?>pos/new_rate';
+                           
+                        }
+                },
+           'excel', 'pdf'
+        ]
+    } );
+          $('.size').DataTable( {
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+           {
+                    text: '+New',
+                    className: 'orange, btn btn-info',
+                     action: function (e, dt, node, config)
+                        {
+                            
+                           window.location='<?php echo base_url(); ?>pos/new_size';
+                           
+                        }
+                },
+           'excel', 'pdf'
+        ]
+    } );
 
 
     $('.dataTables_filter').addClass('pull-right');

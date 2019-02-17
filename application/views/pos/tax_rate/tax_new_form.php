@@ -7,7 +7,7 @@
                         <div class="page-content-wrap">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Register Size Of Material</h3>
+                                    <h3 class="panel-title">TAX RATES</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
@@ -32,19 +32,20 @@
 
 
 
-                                            <form action="<?php echo base_url(); ?>pos/new_size" class="form-horizontal" method="POST" role="form">
+                                            <form action="<?php echo base_url(); ?>pos/new_rate" class="form-horizontal" method="POST" role="form">
+                                              
                                                 <div class="row">
                                                 <div class="form-group col-md-6">
                                                         <div class="form-group">
-                                                            <label for="height">Height</label>
-                                                            <input required type="text" class="form-control" name="height" placeholder="Height"/>
+                                                            <label for="height">Council</label>
+                                                            <input required type="text" class="form-control" value="<?php echo set_value('council'); ?>" name="council" placeholder="Council"/>
                                                         </div>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                         <div class="form-group">
-                                                            <label for="width">Width</label>
-                                                            <input required type="text" class="form-control" name="width" placeholder="Width"/>
+                                                            <label for="width">Rate/Area[cm square]</label>
+                                                            <input required type="text" class="form-control" value="<?php echo set_value('rate_per_area'); ?>" name="rate_per_area" placeholder="Rate"/>
                                                         </div>
                                                 </div>
                                             </div>
@@ -66,7 +67,7 @@
                                                         </div> -->
                                                     </div>
 
-
+                                
 
                                                 <div class="form-group col-md-4">
                                                         <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">SAVE</button>

@@ -18,6 +18,14 @@
                                       <div class="alert alert-success pull-right col-md-12"> <?php echo  $this->session->flashdata('message_name');?> </div> 
                                  <?php }?>
                             <div class="panel panel-body">
+
+
+
+
+                                  <!--   <h2>Create Proxy</h2> -->
+
+
+
                                 <div class="login-v1">
 
                                     <div class="login-box animated fadeInDown">
@@ -28,8 +36,8 @@
 
 
 
-                                            <form action="<?php echo base_url();?>pos/new_pos" class="form-horizontal" method="POST" role="form">
-                                                <?php if (!empty(validation_errors())) echo '<div class="alert alert-success">' .validation_errors().'</div>';?>
+                                            <form action="#" class="form-horizontal" method="POST" role="form">
+                                                <?php foreach($lists as $key): ?>
                                                 <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">POS Name</label>
@@ -37,11 +45,32 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-desktop"></span>
                                                             </div>
-                                                            <input required  value="<?php echo set_value('name'); ?>" type="text" class="form-control" name="name" placeholder="POS Name "/>
+                                                            <input required  value="<?php echo $key->name; ?>" type="text" class="form-control" name="name" placeholder="POS Name "/>
+                                                            <input type="hidden" name="id" value="<?php echo $key->id; ?>">
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('name').'</span>'; ?>
                                                     
                                                 </div>
+                                                <div class="form-group">
+                                                     <label class="control-label">Owner</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <span class="fa fa-user"></span>
+                                                            </div>
+                                                            <select class="form-control" required name="owner_id">
+                                                                <option value="">Select Owner</option>
+                                                                <?php foreach ($owners as $list): ?>
+                                                                    <option value="<?php echo $list->id; ?>" <?php if ($key->owner_id==$list->id) echo 'selected';?> ><?php echo $list->first_name.' '.$list->last_name; ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <?php echo '<span class="text-danger">'. form_error('owner_id').'</span>'; ?>
+                                                
+                                                </div>
+                                            </div>
+
+                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">Category</label>
                                                         <div class="input-group">
@@ -51,7 +80,7 @@
                                                             <select class="form-control" required name="category_id">
                                                                 <option value="">Select category</option>
                                                                 <?php foreach ($catlist as $list): ?>
-                                                                    <option value="<?php echo $list->id; ?>" <?php if ((set_value('category_id'))==$list->id) echo 'selected';?> ><?php echo $list->name; ?></option>
+                                                                    <option value="<?php echo $list->id; ?>" <?php if ($key->category_id==$list->id) echo 'selected';?> ><?php echo $list->name; ?></option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                             
@@ -59,105 +88,27 @@
                                                         <?php echo '<span class="text-danger">'. form_error('category_id').'</span>'; ?>
                                                    
                                                 </div>
-                                            </div>
-                                                <div class="row">
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group">
                                                      <label class="control-label">Till No:</label>
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-hashtag"></span>
                                                             </div>
-                                                            <input required value="<?php echo set_value('till_no'); ?>" type="text" class="form-control" name="till_no" placeholder="Till No"/>
+                                                            <input required value="<?php echo $key->till_no; ?>" type="text" class="form-control" name="till_no" placeholder="Till No"/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('till_no').'</span>'; ?>
                                                 
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">POS Status:</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-bullseye"></span>
-                                                            </div>
-                                                            <select name="status" class="form-control">
-                                                                <option value="">Select status</option>
-                                                                <option value="Active">Active</option>
-                                                                <option value="Inactive">Inactive</option>
-                                                                <option value="Unknown">Unknown</option>
-                                                                
-                                                            </select>
-                                                        </div>
-                                                        <?php echo '<span class="text-danger">'. form_error('name').'</span>'; ?>
-                                               
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <br/>
-                                                <h4 class="text-info">ACTIVITIES</h4>
-                                                <hr>
-                                            <div class="row">
-                                                <br/>
-                                                <h4 class="text-info">Owner's details</h4>
-                                                <hr>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label">First name</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input required type="text" class="form-control" value="<?php echo set_value('first_name'); ?>"  name="first_name" placeholder="First Name "/>
-                                                        </div>
-                                                        <?php echo '<span class="text-danger">'. form_error('first_name').'</span>'; ?>
-                                                
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Middle name</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input type="text" class="form-control" value="<?php echo set_value('middle_name'); ?>" name="middle_name" placeholder="Middle Name"/>
-                                                        </div>
-                                                        <?php echo '<span class="text-danger">'. form_error('middle_name').'</span>'; ?>
-                                                    </div>
-                                               
-                                            </div>
-                                             <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label">Last name</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input required type="text" class="form-control" name="last_name" placeholder="last Name" value="<?php echo set_value('last_name'); ?>"/>
-                                                        </div>
-                                                        <?php echo '<span class="text-danger">'. form_error('last_name').'</span>'; ?>
-                                             
-                                                </div>
-                                                 <div class="form-group col-md-6">
-                                                    <label class="control-label">Mobile</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-address-book"></span>
-                                                            </div>
-                                                            <input required type="number" class="form-control" name="mobile" placeholder="Mobile" value="<?php echo set_value('mobile'); ?>" />
-                                                        </div>
-                                                        <?php echo '<span class="text-danger">'. form_error('mobile').'</span>'; ?>
-                                           
-                                                </div>
                                             </div>
 
-                            
                                              <div class="row">
-                                                <br/>
-                                                <h4 class="text-info">Location details</h4>
-                                                <hr>
                                                 <div class="form-group col-md-6">
                                                 <label class="control-label">Region:</label>
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-address-book"></span>
                                                             </div>
-                                                            <input required type="text" value ="<?php echo set_value('region'); ?>" class="form-control" name="region" placeholder="Region"/>
+                                                            <input required type="text" value ="<?php echo $key->region; ?>" class="form-control" name="region" placeholder="Region"/>
                                                         </div>
                                                          <?php echo '<span class="text-danger">'. form_error('region').'</span>'; ?>
                                                    
@@ -168,7 +119,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-address-card-o"></span>
                                                             </div>
-                                                            <input required type="text" value ="<?php echo set_value('district'); ?>" class="form-control" name="district" placeholder="District"/>
+                                                            <input required type="text" value ="<?php echo $key->district; ?>" class="form-control" name="district" placeholder="District"/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('district').'</span>'; ?>
                                                   
@@ -182,7 +133,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-address-card"></span>
                                                             </div>
-                                                            <input  type="text" class="form-control" value ="<?php echo set_value('village_mtaa'); ?>" name="village_mtaa" placeholder="Village Mtaa"/>
+                                                            <input  type="text" class="form-control" value ="<?php echo $key->Village_mtaa; ?>" name="village_mtaa" placeholder="Village Mtaa"/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('village_mtaa').'</span>'; ?>
                                                     
@@ -193,7 +144,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-address-card"></span>
                                                             </div>
-                                                            <input  type="text" value ="<?php echo set_value('ward'); ?>" class="form-control" name="ward" placeholder="Ward"/>
+                                                            <input  type="text" value ="<?php echo $key->ward; ?>" class="form-control" name="ward" placeholder="Ward"/>
                                                         </div>
                                                          <?php echo '<span class="text-danger">'. form_error('ward').'</span>'; ?>
 
@@ -208,12 +159,27 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-address-card"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" name="street" value ="<?php echo set_value('street'); ?>"  placeholder="Street"/>
+                                                            <input required type="text" class="form-control" name="street" value ="<?php echo $key->street; ?>"  placeholder="Street"/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('street').'</span>'; ?>
                                                     
                                                 </div>
-                                                
+                                                <div class="form-group">
+                                                    <label class="control-label">POS Status:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <span class="fa fa-bullseye"></span>
+                                                            </div>
+                                                            <select name="status" class="form-control">
+                                                                <option value="">Select status</option>
+                                                                <option value="Active">Active</option>
+                                                                <option value="Inactive">Inactive</option>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                        <?php echo '<span class="text-danger">'. form_error('name').'</span>'; ?>
+                                               
+                                                </div>
                                             </div>
 
                                             <div class="row">
@@ -223,7 +189,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-bullseye"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" name="latitude" value ="<?php echo set_value('latitude'); ?>" placeholder="Latitude"/>
+                                                            <input required type="text" class="form-control" name="latitude" value ="<?php echo $key->latitude; ?>" placeholder="Latitude"/>
                                                         </div>
                                                           <?php echo '<span class="text-danger">'. form_error('latitude').'</span>'; ?>
                                                     
@@ -234,12 +200,13 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-bullseye"></span>
                                                             </div>
-                                                            <input required type="text" value ="<?php echo set_value('longitude'); ?>" class="form-control" name="longitude" placeholder="Longitude"/>
+                                                            <input required type="text" value ="<?php echo $key->longtude; ?>" class="form-control" name="longitude" placeholder="Longitude"/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('longitude').'</span>'; ?>
                                                     
                                                 </div>
                                             </div>
+                                        <?php endforeach; ?>
                                              
                                             </div>
 
@@ -258,9 +225,9 @@
 
 
 
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group">
                                                    
-                                                        <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">SAVE</button>
+                                                        <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">ADD</button>
                                                     </div>
                                              
 

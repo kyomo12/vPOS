@@ -7,7 +7,7 @@
                         <div class="page-content-wrap">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">Register POS Owner</h3>
+                                    <h3 class="panel-title">Update User</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
@@ -29,6 +29,7 @@
 
 
                                             <form action="<?php echo base_url(); ?>pos/new_owner" class="form-horizontal" method="POST" role="form">
+                                                <?php foreach ($lists as $list ):?>
                                                 <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">First name</label>
@@ -36,7 +37,8 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-user"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" value="<?php echo set_value('first_name'); ?>"  name="first_name" placeholder="First Name "/>
+                                                            <input type="hidden" name="id" value="<?php echo $list->id;?>">
+                                                            <input required type="text" class="form-control" value="<?php if (!empty(set_value('first_name'))) echo set_value('first_name'); else $list->first_name; ?>"  name="first_name" placeholder="First Name "/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('first_name').'</span>'; ?>
                                                 
@@ -47,7 +49,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-user"></span>
                                                             </div>
-                                                            <input type="text" class="form-control" value="<?php echo set_value('middle_name'); ?>" name="middle_name" placeholder="Middle Name"/>
+                                                            <input type="text" class="form-control" value="" name="middle_name" placeholder="Middle Name"/>
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('middle_name').'</span>'; ?>
                                                     </div>
@@ -61,7 +63,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-user"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" name="last_name" placeholder="last Name" value="<?php echo set_value('last_name'); ?>"/>
+                                                            <input required type="text" class="form-control" name="last_name" placeholder="last Name" value="<?php if (!empty(set_value('last_name'))) echo set_value('last_name'); else $list->last_name; ?>"  />
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('last_name').'</span>'; ?>
                                              
@@ -72,7 +74,7 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fas fa-at"></span>
                                                             </div>
-                                                            <input required type="email" class="form-control" name="email" placeholder="Email" value="<?php echo set_value('email'); ?>" />
+                                                            <input required type="email" class="form-control" name="email" placeholder="Email" value="<?php if (!empty(set_value('email'))) echo set_value('email'); else $list->email; ?>"  />
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('email').'</span>'; ?>
                                                     
@@ -86,13 +88,31 @@
                                                             <div class="input-group-addon">
                                                                 <span class="fa fa-address-book"></span>
                                                             </div>
-                                                            <input required type="number" class="form-control" name="mobile" placeholder="Mobile" value="<?php echo set_value('mobile'); ?>" />
+                                                            <input required type="number" class="form-control" name="mobile" placeholder="Mobile" value="<?php if (!empty(set_value('mobile'))) echo set_value('mobile'); else $list->mobile; ?>" />
                                                         </div>
                                                         <?php echo '<span class="text-danger">'. form_error('mobile').'</span>'; ?>
                                            
                                                 </div>
+                                                 <div class="form-group col-md-6">
+                                                    <label class="control-label">Role</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <span class="fa fa-address-book"></span>
+                                                            </div>
+                                                            <select class="form-control" required name="role_id">
+                                                                <option value="">Select User</option>
+                                                                <?php foreach ($roles as $list): ?>
+                                                                    <option value="<?php echo $list->id; ?>" ><?php echo $list->name; ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <?php echo '<span class="text-danger">'. form_error('role').'</span>'; ?>
+                                           
+                                                </div>
                                                 
                                             </div>
+                                        <?php endforeach;?>
 
                                              
                                             </div>
