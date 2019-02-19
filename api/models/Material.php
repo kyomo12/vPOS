@@ -39,7 +39,7 @@ Class Material {
 	public function deleteMaterial($material_id){
 		$query="DELETE FROM materials WHERE id=".$material_id;
 		$dbcontroller = new DBController();
-		$this->material = $dbcontroller->executeSelectQuery($query);
+		$this->material = $dbcontroller->executeQuery($query);
 		return $this->material;
 	}
 }

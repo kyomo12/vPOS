@@ -65,7 +65,7 @@ Class Pos {
 	public function deletePos($pos_id){
 		$query="DELETE FROM pos WHERE id=".$pos_id;
 		$dbcontroller = new DBController();
-		$this->pos = $dbcontroller->executeSelectQuery($query);
+		$this->pos = $dbcontroller->executeQuery($query);
 		return $this->pos;
 	}
 }

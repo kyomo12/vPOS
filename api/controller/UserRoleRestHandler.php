@@ -1,35 +1,35 @@
 <?php
 require_once("api/controller/ApiRest.php");
-require_once("api/models/Material.php");
+require_once("api/models/UserRole.php");
 
-class MaterialRestHandler extends ApiRest {
+class UserRoleRestHandler extends ApiRest {
 
 	function getRequestMethod($data) {
 		$request_method=$_SERVER["REQUEST_METHOD"];
 		switch($request_method)
 		{
 			case 'GET':
-				// Retrive Materials
+				// Retrive Roles
 				if(!empty($data))
 				{
-					$material_id = intval($data);
-					$this->getMaterials($material_id);
+					$role_id = intval($data);
+					$this->getUserRoles($role_id);
 				}
 				else
 				{
-					$this->getMaterials($material_id=0);
+					$this->getUserRoles($role_id=0);
 				}
 				break;
 			case 'POST':
-				$this->insertMaterial();
+				$this->insertUserRole();
 				break;
 			case 'PUT':
-				$material_id = intval($data);
-				$this->updateMaterial($material_id);
+				$role_id = intval($data);
+				$this->updateUserRole($role_id);
 				break;
 			case 'DELETE':
-				$material_id = intval($data);
-				$this->deleteMaterial($material_id);
+				$role_id = intval($data);
+				$this->deleteUserRole($role_id);
 				break;
 			default:
 				// Invalid Request Method
@@ -38,19 +38,18 @@ class MaterialRestHandler extends ApiRest {
 		}
 	}
 
-	function getMaterials($material_id) {
+	function getUserRoles($role_id) {
 
-		$material = new Material();
-		$rawData = $material->getMaterials($material_id);
+		$userRole  = new UserRole();
+		$rawData = $userRole ->getUserRoles($role_id);
 		if(empty($rawData) || sizeof($rawData) == 0) {
 			$statusCode = 404;
-			$rawData = array('error' => 'No Material found!');
+			$rawData = array('error' => 'No Role found!');
 		} else {
 			$statusCode = 200;
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
-		// $result["output"] = $rawData;
 
 		if(strpos($jsonRequest,'application/json') !== false){
 			$response = $this->encodeJson($rawData);
@@ -58,23 +57,22 @@ class MaterialRestHandler extends ApiRest {
 		}
 	}
 
-	function insertMaterial() {
+	function insertUserRole() {
 		if (empty($_POST)) {
 			$_POST = json_decode(file_get_contents("php://input"), true) ? : [];
 		}
 		$json_str = file_get_contents('php://input');
 
-		$material = new Material();
-		if($material->insertMaterial($_POST)) {
+		$userRole  = new UserRole();
+		if($userRole->insertUserRole($_POST)) {
 			$statusCode = 200;
-			$insertResponse = array('success' => 'Material Added Successfully');
+			$insertResponse = array('success' => 'Role Added Successfully');
 		} else {
 			$statusCode = 300;
-			$insertResponse = array('error' => 'Material Addition Unsuccessfully');
+			$insertResponse = array('error' => 'Role Addition Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
-		// $result["output"] = $insertResponse;
 
 		if(strpos($jsonRequest,'application/json') !== false){
 			$response = $this->encodeJson($insertResponse);
@@ -82,24 +80,23 @@ class MaterialRestHandler extends ApiRest {
 		}
 	}
 
-	function updateMaterial($material_id) {
+	function updateUserRole($role_id) {
 		if (empty($_POST)) {
 			$_POST = json_decode(file_get_contents("php://input"), true) ? : [];
 		}
 		$json_str = file_get_contents('php://input');
 
-		$material = new Material();
+		$userRole  = new UserRole();
 
-		if($material->updateMaterial($material_id, $_POST)) {
+		if($userRole ->updateUserRole($role_id, $_POST)) {
 			$statusCode = 200;
-			$updateResponse = array('success' => 'Material Updated Successfully');
+			$updateResponse = array('success' => 'Role Updated Successfully');
 		} else {
 			$statusCode = 300;
-			$updateResponse = array('error' => 'Material Update Unsuccessfully');
+			$updateResponse = array('error' => 'Role Update Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
-		// $result["output"] = $updateResponse;
 
 		if(strpos($jsonRequest,'application/json') !== false){
 			$response = $this->encodeJson($updateResponse);
@@ -107,20 +104,19 @@ class MaterialRestHandler extends ApiRest {
 		}
 	}
 
-	function deleteMaterial($material_id) {
+	function deleteUserRole($role_id) {
 
-		$material = new Material();
+		$userRole  = new UserRole();
 
-		if($material->deleteMaterial($material_id)) {
+		if($userRole ->deleteUserRole($role_id)) {
 			$statusCode = 200;
-			$updateResponse = array('success' => 'Material Deleted Successfully');
+			$updateResponse = array('success' => 'Role Deleted Successfully');
 		} else {
 			$statusCode = 300;
-			$updateResponse = array('error' => 'Material Deletion Unsuccessfully');
+			$updateResponse = array('error' => 'Role Deletion Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
-		// $result["output"] = $updateResponse;
 
 		if(strpos($jsonRequest,'application/json') !== false){
 			$response = $this->encodeJson($updateResponse);

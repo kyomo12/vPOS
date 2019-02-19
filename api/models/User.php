@@ -15,6 +15,17 @@ Class User {
 		return $this->user;
 	}
 
+	public function getUsersByMobile($mobile){
+		$query = "SELECT * FROM user";
+		if($user_id != 0)
+		{
+			$query.=" WHERE mobile=".$mobile." LIMIT 1";
+		}
+		$dbcontroller = new DBController();
+		$this->user = $dbcontroller->executeSelectQuery($query);
+		return $this->user;
+	}
+
 	public function insertUser($request){
 		$first_name = $request['first_name'];
 		$last_name = $request['last_name'];
@@ -26,8 +37,15 @@ Class User {
 		$query="INSERT INTO user SET first_name='{$first_name}', last_name='{$last_name}', mobile='{$mobile}',
 						email='{$email}', password='{$password}', role='{$role}'";
 		$dbcontroller = new DBController();
-		$this->pos = $dbcontroller->executeQuery($query);
-		return $this->pos;
+		$this->user = $dbcontroller->executeQuery($query);
+		// $this->user['mobile'] = $mobile;
+		return $this->user;
+		// if ($dbcontroller->executeQuery($query)) {
+			// $this->user = $this->getUsersByMobile($mobile);
+		// 	return $this->getUsersByMobile($mobile);
+		// } else {
+		// 	return $this->user;
+		// }
 	}
 
 	public function updateUser($user_id, $request){

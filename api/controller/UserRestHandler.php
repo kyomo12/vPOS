@@ -47,13 +47,32 @@ class UserRestHandler extends ApiRest {
 			$rawData = array('error' => 'No User found!');
 		} else {
 			$statusCode = 200;
+			$userRole = new UserRole();
+
+			$roles = array();
+			foreach ($rawData as $key => $value) {
+				// Get role data
+				$roleResult = $userRole->getUserRoles($rawData[$key]['role']);
+				if(empty($roleResult) || sizeof($roleResult) == 0) {
+					$roleResult = NULL;
+				}
+
+				$result["id"] = $rawData[$key]['id'];
+				$result["first_name"] = $rawData[$key]['first_name'];
+				$result["last_name"] = $rawData[$key]['last_name'];
+				$result["mobile"] = $rawData[$key]['mobile'];
+				$result["email"] = $rawData[$key]['email'];
+				$result["created_by"] = $rawData[$key]['created_by'];
+				$result["role"] = $roleResult;
+				array_push($roles, $result);
+			}
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
 		// $result["output"] = $rawData;
 
 		if(strpos($jsonRequest,'application/json') !== false){
-			$response = $this->encodeJson($rawData);
+			$response = $this->encodeJson($roles);
 			echo $response;
 		}
 	}
