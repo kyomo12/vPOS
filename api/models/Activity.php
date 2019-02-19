@@ -34,10 +34,10 @@ Class Activity {
 		return $this->activity;
 	}
 
-	public function deleteActivity($material_id){
+	public function deleteActivity($activity_id){
 		$query="DELETE FROM activities WHERE id=".$activity_id;
 		$dbcontroller = new DBController();
-		$this->activity = $dbcontroller->executeSelectQuery($query);
+		$this->activity = $dbcontroller->executeQuery($query);
 		return $this->activity;
 	}
 }

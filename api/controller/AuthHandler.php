@@ -2,6 +2,8 @@
 require_once("api/controller/ApiRest.php");
 require_once("api/models/User.php");
 require_once("api/library/JwtHelper.php");
+require_once("api/controller/ErrorHandler.php");
+require_once("api/models/UserRole.php");
 
 class AuthHandler extends ApiRest {
 
@@ -41,11 +43,21 @@ class AuthHandler extends ApiRest {
 			$jwtToken = $jwt->encode($token, 'secret_server_key');
 		}
 
+		$userRole = new UserRole();
+		$roleData = $userRole->getUserRoles($rawData[0]['role']);
+		if(empty($roleData) || sizeof($roleData) == 0) {
+			$roleData = NULL;
+		}
+
+
 		$jsonRequest = $this->jsonRequest($statusCode);
-		$result["user"] = array('id' => $rawData[0]['id'],
+
+		$userData = array('id' => $rawData[0]['id'],
 													'first_name' => $rawData[0]['first_name'], 'last_name' => $rawData[0]['last_name'],
  													'mobile' => $rawData[0]['mobile'], 'email' => $rawData[0]['email'],
-													'role_id' => $rawData[0]['role']);
+													'role' => $roleData);
+
+		$result["user"] = array($userData);
 
 		$result["token"] = $jwtToken;
 

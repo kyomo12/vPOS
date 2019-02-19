@@ -1,6 +1,8 @@
 <?php
 require_once("api/controller/ApiRest.php");
 require_once("api/models/Pos.php");
+require_once("api/models/Category.php");
+require_once("api/models/PosOwner.php");
 
 class PosRestHandler extends ApiRest {
 
@@ -42,18 +44,44 @@ class PosRestHandler extends ApiRest {
 
 		$pos = new Pos();
 		$rawData = $pos->getPos($pos_id);
+		$posResult = array();
+
 		if(empty($rawData) || sizeof($rawData) == 0) {
 			$statusCode = 404;
-			$rawData = array('error' => 'No POS found!');
+			$posResult = array('error' => 'No POS found!');
 		} else {
 			$statusCode = 200;
+			// Get POS Category and Owner data
+			$category = new Category();
+			$posOwner = new PosOwner();
+
+			foreach ($rawData as $key => $value) {
+				$categoryResult = $category->getCategories($rawData[$key]['category_id']);
+				$ownerResult = $posOwner->getPosOwners($rawData[$key]['owner_id']);
+
+				if(empty($categoryResult) || sizeof($categoryResult) == 0) {
+					$categoryResult = NULL;
+				}
+
+				if(empty($ownerResult) || sizeof($ownerResult) == 0) {
+					$ownerResult = NULL;
+				}
+
+				$posResult[$key] = array('id' => $rawData[0]['id'],
+															'name' => $rawData[0]['name'], 'till_no' => $rawData[0]['till_no'],
+															'region' => $rawData[0]['region'], 'district' => $rawData[0]['district'],
+															'ward' => $rawData[0]['ward'], 'village_mtaa' => $rawData[0]['Village_mtaa'],
+															'street' => $rawData[0]['street'], 'latitude' => $rawData[0]['latitude'],
+															'longtude' => $rawData[0]['longtude'], 'pos_status' => $rawData[0]['pos_status'],
+															'category' => $categoryResult, 'owner' => $ownerResult);
+			}
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
 		// $result["output"] = $rawData;
 
 		if(strpos($jsonRequest,'application/json') !== false){
-			$response = $this->encodeJson($rawData);
+			$response = $this->encodeJson($posResult);
 			echo $response;
 		}
 	}
