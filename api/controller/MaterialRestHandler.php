@@ -1,35 +1,35 @@
 <?php
 require_once("api/controller/ApiRest.php");
-require_once("api/models/Pos.php");
+require_once("api/models/Material.php");
 
-class PosRestHandler extends ApiRest {
+class MaterialRestHandler extends ApiRest {
 
 	function getRequestMethod($data) {
 		$request_method=$_SERVER["REQUEST_METHOD"];
 		switch($request_method)
 		{
 			case 'GET':
-				// Retrive Pos
+				// Retrive Materials
 				if(!empty($data))
 				{
-					$pos_id = intval($data);
-					$this->getPos($pos_id);
+					$material_id = intval($data);
+					$this->getMaterials($material_id);
 				}
 				else
 				{
-					$this->getPos($pos_id=0);
+					$this->getMaterials($material_id=0);
 				}
 				break;
 			case 'POST':
-				$this->insertPOS();
+				$this->insertMaterial();
 				break;
 			case 'PUT':
-				$pos_id = intval($data);
-				$this->updatePos($pos_id);
+				$material_id = intval($data);
+				$this->updateMaterial($material_id);
 				break;
 			case 'DELETE':
-				$pos_id = intval($data);
-				$this->deletePos($pos_id);
+				$material_id = intval($data);
+				$this->deleteMaterial($material_id);
 				break;
 			default:
 				// Invalid Request Method
@@ -38,13 +38,13 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function getPos($pos_id) {
+	function getMaterials($material_id) {
 
-		$pos = new Pos();
-		$rawData = $pos->getPos($pos_id);
+		$Material = new Material();
+		$rawData = $Material->getMaterials($material_id);
 		if(empty($rawData) || sizeof($rawData) == 0) {
 			$statusCode = 404;
-			$rawData = array('error' => 'No POS found!');
+			$rawData = array('error' => 'No Material found!');
 		} else {
 			$statusCode = 200;
 		}
@@ -58,19 +58,19 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function insertPos() {
+	function insertMaterial() {
 		if (empty($_POST)) {
 			$_POST = json_decode(file_get_contents("php://input"), true) ? : [];
 		}
 		$json_str = file_get_contents('php://input');
 
-		$pos = new Pos();
-		if($pos->insertPos($_POST)) {
+		$Material = new Material();
+		if($Material->insertMaterial($_POST)) {
 			$statusCode = 200;
-			$insertResponse = array('success' => 'POS Added Successfully');
+			$insertResponse = array('success' => 'Material Added Successfully');
 		} else {
 			$statusCode = 300;
-			$insertResponse = array('error' => 'POS Addition Unsuccessfully');
+			$insertResponse = array('error' => 'Material Addition Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
@@ -82,20 +82,20 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function updatePos($pos_id) {
+	function updateMaterial($material_id) {
 		if (empty($_POST)) {
 			$_POST = json_decode(file_get_contents("php://input"), true) ? : [];
 		}
 		$json_str = file_get_contents('php://input');
 
-		$pos = new Pos();
+		$Material = new Material();
 
-		if($pos->updatePos($pos_id, $_POST)) {
+		if($Material->updateMaterial($material_id, $_POST)) {
 			$statusCode = 200;
-			$updateResponse = array('success' => 'POS Updated Successfully');
+			$updateResponse = array('success' => 'Material Updated Successfully');
 		} else {
 			$statusCode = 300;
-			$updateResponse = array('error' => 'POS Update Unsuccessfully');
+			$updateResponse = array('error' => 'Material Update Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
@@ -107,16 +107,16 @@ class PosRestHandler extends ApiRest {
 		}
 	}
 
-	function deletePos($pos_id) {
+	function deleteMaterial($material_id) {
 
-		$pos = new Pos();
+		$Material = new Material();
 
-		if($pos->deletePos($pos_id)) {
+		if($Material->deleteMaterial($material_id)) {
 			$statusCode = 200;
-			$updateResponse = array('success' => 'POS Deleted Successfully');
+			$updateResponse = array('success' => 'Material Deleted Successfully');
 		} else {
 			$statusCode = 300;
-			$updateResponse = array('error' => 'POS Deletion Unsuccessfully');
+			$updateResponse = array('error' => 'Material Deletion Unsuccessfully');
 		}
 
 		$jsonRequest = $this->jsonRequest($statusCode);
