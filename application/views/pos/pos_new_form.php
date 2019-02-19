@@ -28,8 +28,8 @@
 
 
 
-                                            <form action="<?php echo base_url();?>pos/new_pos" class="form-horizontal" method="POST" role="form">
-                                                <?php if (!empty(validation_errors())) echo '<div class="alert alert-success">' .validation_errors().'</div>';?>
+                                            <form id="pos_form" action="<?php echo base_url();?>pos/new_pos" class="form-horizontal" method="POST" role="form">
+                                                <?php if (!empty(validation_errors())) echo '<div class="alert alert-danger">' .validation_errors().'</div>';?>
                                                 <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">POS Name</label>
@@ -93,7 +93,45 @@
                                             <div class="row">
                                                 <br/>
                                                 <h4 class="text-info">ACTIVITIES</h4>
-                                                <hr>
+                                                 <hr>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                      <select id="activity" class="form-control select2"  name="" style="width: 100%;">
+                                                        <option value="">--Select Activities--</option>
+                                                          <?php foreach($activities as  $list):?>
+                                                          <option value="<?php echo $list->id; ?>"><?php echo $list->name;?></option>
+                                                          <?php endforeach; ?>
+                                                      </select>
+                                                       
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <div class="btn activitybtn"><button class="btn btn-primary">+Add</button></div>
+                                                    </div>
+                                              </div>
+                                               <table class="activity_add  table" width="100%">
+                                                  <thead class="thead-dark" style="background-color: #eee;">
+                                                    <tr>
+
+                                                      <th width="%">SN</th>
+                                                      <th width="%">NAME</th>
+                                                      
+                                                    </tr> 
+                                                  </thead>
+                                                  <?php if (!empty(set_value('activity'))){
+                                                     $act_v=$this->common->activities_array(set_value('activity'))->result();
+                                                    foreach ($act_v as $list):?>
+                                                        
+                                                    <tr>
+                                                        <td>#<input type="hidden" name="activity[]" value="<?php echo $list->id; ?>" /></td>
+                                                        <td><?php echo $list->name;  ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+
+                                                 <?php  } ?>
+                                                </table>
+                                            </div>
+
+                                               
                                             <div class="row">
                                                 <br/>
                                                 <h4 class="text-info">Owner's details</h4>

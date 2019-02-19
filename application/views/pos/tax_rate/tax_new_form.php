@@ -13,6 +13,10 @@
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
                                     </ul>
                                 </div>
+                                <?php 
+                                      if (! empty($this->session->flashdata('message_name'))){?>
+                                      <div class="alert alert-success pull-right col-md-12"> <?php echo  $this->session->flashdata('message_name');?> </div> 
+                                 <?php }?>
                             <div class="panel panel-body">
 
 

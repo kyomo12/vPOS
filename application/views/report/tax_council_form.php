@@ -7,21 +7,14 @@
                         <div class="page-content-wrap">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                                    <h3 class="panel-title">POS Category</h3>
+                                    <h3 class="panel-title">TAX REPORT DISTRICT BASED</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
                                     </ul>
                                 </div>
+                                
                             <div class="panel panel-body">
-
-
-
-
-                                  <!--   <h2>Create Proxy</h2> -->
-
-
-
                                 <div class="login-v1">
 
                                     <div class="login-box animated fadeInDown">
@@ -32,28 +25,44 @@
 
 
 
-                                            <form action="#" class="form-horizontal" method="POST" role="form">
-                                                <div class="form-row">
+                                            <form id="" action="<?php echo base_url();?>report/tax_per_district" class="form-horizontal" method="POST" role="form">
+                                                
+                                                <div class="row">
+                  <div class="form-group col-md-6">
+                        <label class="control-label">Council</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span class="fa fa-desktop"></span>
+                                </div>
+                                <select class="form-control" required name="council">
+                                    <option value="">Select districts</option>
+                                    <?php foreach ($districts as $list1): ?>
+                                        <option value="<?php echo $list1->district; ?>"><?php echo $list1->district; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                
+                            </div>
+                            <?php echo '<span class="text-danger">'. form_error('council').'</span>'; ?>
+                       
+                    </div>
                                                 <div class="form-group col-md-6">
-                                                    <div class=" no-padding-left no-padding-right">
+                                                    <label class="control-label">Category</label>
                                                         <div class="input-group">
                                                             <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
+                                                                <span class="fa fa-desktop"></span>
                                                             </div>
-                                                            <input required type="text" class="form-control" name="name" placeholder="Category Name"/>
+                                                            <select class="form-control" required name="category_id">
+                                                                <option value="">Select category</option>
+                                                                <?php foreach ($catlist as $list): ?>
+                                                                    <option value="<?php echo $list->id; ?>" <?php if ((set_value('category_id'))==$list->id) echo 'selected';?> ><?php echo $list->name; ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            
                                                         </div>
-                                                    </div>
+                                                        <?php echo '<span class="text-danger">'. form_error('category_id').'</span>'; ?>
+                                                   
                                                 </div>
-                                              <!--   <div class="form-group col-md-6">
-                                                    <div class="no-padding-left no-padding-right">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <span class="fa fa-user"></span>
-                                                            </div>
-                                                            <input required type="text" class="form-control" name="fullname" placeholder="Full Name"/>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                            </div>
                                             </div>
 
 
@@ -71,11 +80,11 @@
 
 
 
-                                                <div class="form-group">
-                                                    <div class="col-md-6 no-padding-left no-padding-right">
-                                                        <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">ADD</button>
+                                                <div class="form-group col-md-6">
+                                                   
+                                                        <button class="btn btn-primary btn-lg btn-block" id="doRegisterBtn" type="submit">Fetch Report</button>
                                                     </div>
-                                                </div>
+                                             
 
 
 

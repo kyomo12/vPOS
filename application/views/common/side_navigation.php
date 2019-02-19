@@ -13,7 +13,7 @@
 
             <li class="xn-title">POINT OF SALE</li>
             <li class="show-menu-arrow">
-                <a href="index.html"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
+                <a href="<?php echo base_url(); ?>welcome/home"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
             </li>
             <!--<li class="show-menu-arrow active">-->
                 <!--<a href="manage_shareholder.html"><span class="fa fa-group"></span> <span class="xn-text">POS</span></a>-->
@@ -28,7 +28,7 @@
             </li>
             
             <li class="xn-openable">
-                <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Settings</span></a>
+                <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Configuration</span></a>
                 <ul>
                     <!-- <li><a href="#"><span class="fa fa-users"></span>User Management</a></li> -->
                     
@@ -49,6 +49,20 @@
                      
 
 
+                </ul>
+            </li>
+            <li class="xn-openable">
+                <a href="#"><span class="fa fa-users"></span> <span class="xn-text">REPORTING</span></a>
+                <ul>
+                    <li><a href="<?php echo base_url(); ?>report/tax_per_district"><span class="fa fa-users"></span>TAX</a></li>
+                    <li><a href="<?php echo base_url(); ?>report/pos"><span class="fa fa-sort-amount-asc"></span>POS</a></li>
+                </ul>
+            </li>
+            <li class="xn-openable">
+                <a href="#"><span class="fa fa-users"></span> <span class="xn-text">NOTIFICATION</span></a>
+                <ul>
+                    <li><a href="<?php echo base_url(); ?>report/notification"><span class="fa fa-users"></span>Notification</a></li>
+                    <!-- <li><a href="<?php echo base_url(); ?>report/pos"><span class="fa fa-sort-amount-asc"></span>POS</a></li> -->
                 </ul>
             </li>
 

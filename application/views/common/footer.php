@@ -53,6 +53,7 @@
 
         <script type="text/javascript" src="<?php echo base_url(); ?>js/plugins.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>js/actions.js"></script>
+        <?php $this->load->view('popup_lib/modal'); ?>
         <!-- END TEMPLATE -->
     <!-- END SCRIPTS -->
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2019 at 07:42 AM
+-- Generation Time: Feb 17, 2019 at 07:53 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.13
 
@@ -79,33 +79,7 @@ CREATE TABLE `materials` (
 --
 
 INSERT INTO `materials` (`id`, `name`, `description`) VALUES
-(1, 'MPESA BANGO', 'Mabango ya mpesa'),
-(2, 'Majarida', 'Office majarida');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `notification`
---
-
-CREATE TABLE `notification` (
-  `id` int(11) NOT NULL,
-  `msg` varchar(5000) NOT NULL,
-  `not_status` varchar(10) DEFAULT 'unread',
-  `read_status` int(11) NOT NULL DEFAULT '0',
-  `pos_id` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `read_date` datetime DEFAULT NULL,
-  `resolved_date` datetime DEFAULT NULL,
-  `no_reminders` int(10) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `notification`
---
-
-INSERT INTO `notification` (`id`, `msg`, `not_status`, `read_status`, `pos_id`, `created_date`, `read_date`, `resolved_date`, `no_reminders`) VALUES
-(1, 'MWAKAJUMA POS Is Inactive Please Visit and remove VODACOM Branding Material', 'unread', 0, 3, '2019-02-18 00:00:00', NULL, NULL, 5);
+(1, 'MPESA BANGO', 'Mabango ya mpesa');
 
 -- --------------------------------------------------------
 
@@ -137,11 +111,8 @@ CREATE TABLE `pos` (
 INSERT INTO `pos` (`id`, `name`, `category_id`, `owner_id`, `till_no`, `region`, `district`, `ward`, `Village_mtaa`, `street`, `latitude`, `longtude`, `pos_status`, `created_by`) VALUES
 (1, 'KIWANGO', 0, 1, '555', 'Dar es Salaam', 'Ilala', 'Kikwambe', 'Malinyi', NULL, '3.0900', NULL, NULL, 1),
 (2, 'Kimako', 0, 1, 'welcome', 'Mbeya', 'Mbalizi', 'ward', 'Mbalizi', NULL, '30', NULL, NULL, 1),
-(3, 'KIWANGO', 4, 1, '65757', 'Mbeya', 'MBz', 'ward', 'MBZ', NULL, '20', '20', 'Active', 1),
-(4, 'KIWANGO2', 4, 1, '6575745', 'MBY', 'JIJI', 'wer', 'err', NULL, '30', NULL, 'Active', 1),
-(5, 'Kimanga', 3, 2, '6777', 'Mbeya', 'Ilala', 'War1', 'Mango', NULL, '30', '20', 'Active', 1),
-(6, 'WELL AGENT', 3, 3, '6777', 'DAR', 'Ilala', 'War1', 'Mango', NULL, '30', NULL, 'Active', 1),
-(7, 'Selling Phones', 4, 4, '78965', 'Morogoro', 'Kilombero', 'Nyamvis', 'Ruaha', NULL, '859.369874', NULL, 'Active', 1);
+(3, 'KIWANGO', 4, 1, '65757', 'Mbeya', 'MBz', 'ward', 'MBZ', NULL, '20', NULL, NULL, 1),
+(4, 'KIWANGO2', 4, 1, '6575745', 'MBY', 'JIJI', 'wer', 'err', NULL, '30', NULL, 'Active', 1);
 
 -- --------------------------------------------------------
 
@@ -155,19 +126,6 @@ CREATE TABLE `pos_activities` (
   `pos_id` int(11) NOT NULL,
   `created_by` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pos_activities`
---
-
-INSERT INTO `pos_activities` (`id`, `activity_id`, `pos_id`, `created_by`) VALUES
-(1, 2, 6, NULL),
-(2, 3, 6, NULL),
-(13, 3, 5, NULL),
-(14, 2, 5, NULL),
-(18, 3, 3, NULL),
-(19, 2, 3, NULL),
-(20, 3, 7, NULL);
 
 -- --------------------------------------------------------
 
@@ -183,13 +141,6 @@ CREATE TABLE `pos_material` (
   `size_id` int(12) DEFAULT NULL,
   `photo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pos_material`
---
-
-INSERT INTO `pos_material` (`id`, `pos_id`, `material_id`, `status`, `size_id`, `photo`) VALUES
-(1, 5, 1, 'active', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -212,11 +163,7 @@ CREATE TABLE `pos_owner` (
 --
 
 INSERT INTO `pos_owner` (`id`, `first_name`, `last_name`, `middle_name`, `email`, `mobile`, `created_by`) VALUES
-(1, 'Jackon', 'Karango', 'HH', 'kara.h@gmail.com', '07654321890', 1),
-(2, 'Wnjoka', 'Langson', 'Jamson', NULL, '07654321887', 1),
-(3, 'John', 'gfgfg', 'Jackson', NULL, '07654323456', 1),
-(4, 'Stephen', 'Ngailo', 'Medard', NULL, '255782557924', 1),
-(5, 'John', 'Haule', 'Martin', 'john@yahoo.com', '2557863954', 1);
+(1, 'Jackon', 'Karango', 'HH', 'kara.h@gmail.com', '07654321890', 1);
 
 -- --------------------------------------------------------
 
@@ -235,9 +182,7 @@ CREATE TABLE `rate` (
 --
 
 INSERT INTO `rate` (`id`, `council`, `rate_per_area`) VALUES
-(1, 'Ilala', 120),
-(2, 'Ubungo', 1000),
-(3, 'Temeke', 1200);
+(1, 'Kasuru', 120);
 
 -- --------------------------------------------------------
 
@@ -325,12 +270,6 @@ ALTER TABLE `materials`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `notification`
---
-ALTER TABLE `notification`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `pos`
 --
 ALTER TABLE `pos`
@@ -398,43 +337,37 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `notification`
---
-ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pos`
 --
 ALTER TABLE `pos`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pos_activities`
 --
 ALTER TABLE `pos_activities`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pos_material`
 --
 ALTER TABLE `pos_material`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pos_owner`
 --
 ALTER TABLE `pos_owner`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rate`
 --
 ALTER TABLE `rate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `role`

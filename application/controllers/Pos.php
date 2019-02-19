@@ -313,6 +313,8 @@ public function update_pos()
 		    if (empty($id)) $id=$this->input->post('id');
 		    $data['lists']=table_by_id('pos','id',$id);
 		    $data['title']='update pos';
+		    $data['activities']=model_list('activities')->result();
+		    $data['curr_activities']=$this->common->get_pos_activity($id)->result();
 		    $data['owners']=$this->pos_model->owners()->result();
         	$data['catlist']=$this->pos_model->categories()->result();
 		   initial_view($data);
@@ -327,7 +329,7 @@ public function update_pos()
 		    $this->form_validation->set_rules('ward', 'ward', 'required');
 		    $this->form_validation->set_rules('village_mtaa', 'ward', 'trim');
 		    $this->form_validation->set_rules('status', 'status', 'trim|required');
-            $this->form_validation->set_rules('longitude', 'longitude', 'trim|required');
+            $this->form_validation->set_rules('longtude', 'longtude', 'trim|required');
             $this->form_validation->set_rules('latitude', 'latitude', 'trim|required');
 
 		    //$this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -349,11 +351,14 @@ public function update_pos()
 		   		'till_no'=>$this->input->post('till_no'),
 		   		'owner_id'=>$this->input->post('owner_id'),
 		   		'pos_status'=>$this->input->post('status')
-		   		
-	
-
 		   	);
-
+		   	var_dump($array);
+		   	$array=$this->input->post('activity');
+            remove('pos_activities','pos_id',$this->input->post('id'));
+            foreach ($array as $key=>$value ) {
+		   		$data_innn = array('pos_id' =>$this->input->post('id') ,'activity_id'=>$value );
+		   		insert('pos_activities',$data_innn);
+		   	}
 		   	update('pos','id',$data_in,$this->input->post('id'));
             //$this->parent_model->insert($data);
             $this->session->set_flashdata('message_name',
@@ -367,10 +372,12 @@ public function new_pos()
 		    $data['title']='New pos';
 		    $data['owners']=$this->pos_model->owners()->result();
         	$data['catlist']=$this->pos_model->categories()->result();
+        	$data['activities']=model_list('activities')->result();
 		   initial_view($data);
         	$this->load->library('form_validation');
         	//owner
         	 $this->form_validation->set_rules('first_name', 'first name', 'trim|required');
+        	 //$this->form_validation->set_rules('activity', 'activity', 'trim|required');
 		    $this->form_validation->set_rules('last_name', 'last name', 'trim|required');
 		   $this->form_validation->set_rules('middle_name', 'middle name', 'trim');
 		    $this->form_validation->set_rules('email', 'email', 'trim');
@@ -395,6 +402,8 @@ public function new_pos()
 		    footer();
 		   }
 		   else {	
+		   	$array=$this->input->post('activity');
+
 		   	$data_owner = array('first_name' => $this->input->post('first_name'),
 		   		             'last_name'=>$this->input->post('last_name'),
 		   		             'middle_name'=>$this->input->post('middle_name'),
@@ -416,14 +425,16 @@ public function new_pos()
 		   		'owner_id'=>$owner_id,
 		   		'pos_status'=>$this->input->post('status'),
 		   		'created_by'=>1
-	
-
 		   	);
-
-		   	insert('pos',$data_in);
+		   	
+		   	$pos_id=insert('pos',$data_in);
+		   	foreach ($array as $key=>$value ) {
+		   		$data_innn = array('pos_id' =>$pos_id ,'activity_id'=>$value );
+		   		insert('pos_activities',$data_innn);
+		   	}
             //$this->parent_model->insert($data);
             $this->session->set_flashdata('message_name',
-				 'Success! Created the material');
+				 'Success! Created the pos');
             redirect('pos/new_pos');
           }
 		
@@ -525,4 +536,26 @@ function tax_rates()
         	$this->load->view('pos/tax_rate/rate_list');
         	footer();	
         }
+function get_activity()
+       {
+       	$id=$this->input->post('activity');
+       	$lists=table_by_id('activities','id',$id);
+       	foreach ($lists as $list):
+       		$data = array('name' => strtoupper($list->name),
+       		              'id' => strtoupper($list->id) );
+       	endforeach;
+       	 //header('Content-Type: application/json');
+       		echo json_encode($data);
+
+       }
+function details()
+   {
+   	$data['id']=$id=$this->uri->segment(3);
+   	$data['detail']=$this->pos_model->pos_details($id)->result();
+   	$data['activities']=$this->common->get_pos_activity($id)->result();
+   	$data['material']=$this->common->get_pos_materials($id)->result();
+   	initial_view($data);
+     $this->load->view('pos/profile');
+    footer();
+   }
 }

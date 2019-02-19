@@ -13,22 +13,29 @@
                             <!-- START DEFAULT DATATABLE -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">POS OWNERS</h3>
+                                    <h3 class="panel-title">NOTIFICATION STATUS</h3>
                                     <ul class="panel-controls">
                                         <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
                                         <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
                                     </ul>
                                 </div>
                                 <div class="panel-body">
+                                    <?php 
+                                      if (! empty($this->session->flashdata('message_name'))){?>
+                                      <div class="alert alert-success pull-right col-md-12"> <?php echo  $this->session->flashdata('message_name');?> </div> 
+                                 <?php }?>
                                     <div class="table-responsive">
-                                         <table class="table datatable">
+                                         <table class="table table1 datatable">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
-                                                    <th>FIRST NAME</th>
-                                                    <th>LAST NAME</th>
-                                                    <th>EMAIL</th>
-                                                    <th>MOBILE</th>
+                                                    <th>SN</th>
+                                                    <th>POS</th>
+                                                    <th>Notification</th>
+                                                    <th>Send Date</th>
+                                                    <th>No Reminders</th>
+                                                    <th>Due Days</th>
+                                                    <th>Status</th>
+                                                    <th>ACTION</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -36,16 +43,19 @@
                                 
                                                 <tr>
                                                     <td><?php echo $i; ?></td>
-                                                    <td><?php echo $list->first_name; ?></td>
-                                                    <td><?php echo $list->middle_name; ?></td>
-                                                    <td><?php echo $list->last_name; ?></td>
-                                                    <td><?php echo $list->email; ?></td>
-                                                    <td><?php echo $list->mobile; ?></td>
+                                                    <td><?php echo ($list->name); ?></td>
+                                                    <td><?php echo ($list->msg); ?></td>
+                                                    <td><?php echo strtoupper($list->created_date); ?></td>
+                                                    <td><?php echo $list->no_reminders; ?></td>
+                                                    <td><?php echo '0';?></td>
+                                                    <td><?php echo $list->not_status; ?></td>
+                                                    <!-- <td><?php echo $list->region; ?></td> -->
+                                                 
                                                     
                                                     <td>
                                                         <div class="btn-group-">
-                                                            <a  href="<?php echo base_url(); ?>pos/edit_owner/<?php echo $list->id; ?>" class="btn btn-primary"  title="Edit" data-toggle="tooltip">Edit</a>
-                                                            <a style="margin-right: 5px" class="btn btn-danger pull-left-"  title="Delete" data-toggle="tooltip">Delete</a>
+                                                            <a class="btn btn-info" href="javascript:;"  title="Edit" onclick="showAjaxModal('<?php echo base_url();?>report/send_reminder/<?php echo $list->id;?>');">Remind</a>
+                                                            
                                                         </div>
                                                     </td>
                                                 </tr>

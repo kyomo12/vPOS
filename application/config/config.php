@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/vpos';
-
+//$config['base_url'] = 'http://vpos.mifumotz.com';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -324,7 +324,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'TANZANIA $#)!%#!NDNDBFT#&<DYTE';
 
 /*
 |--------------------------------------------------------------------------
